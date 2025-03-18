@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Webpage</title>
+    <link rel="stylesheet" href="{% static 'mainapp/styles.css'%}">
+    <script src="{% static 'mainapp/index.js' %}" defer></script>
+</head>
+<body>
+    
+    <div class="container" style="background-color: #f0f0f0; ">
+        <h1 style="display: inline; text-align: center; padding: 20px; margin: 20px; border:2px solid black" >Simple Webpage</h1>
+        <pstyle="display: inline;">This is a simple webpage with some interactive elements.</p>
+        <div class="inner-container">
+            <textarea id="grid-1" placeholder="Type your text here..."></textarea>
+            <div id="grid-2"></div>
+        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="radio-options">
+                <input type="radio" id="OTP" name="selection" class="method">
+                <label for="OTP">OTP</label>
+                <input type="radio" id="check2" name="selection" class="method">
+                <label for="check2">Check 2</label>
+                <input type="radio" id="check3" name="selection" class="method">
+                <label for="check3">Check 3</label>
+            </div>
+            <fieldset class="features">
+                <legend>Choose your monster's features:</legend>
+                <label><input type="checkbox" id="scales" name="scales" checked> Scales</label>
+                <label><input type="checkbox" id="horns" name="horns"> Horns</label>
+            </fieldset>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

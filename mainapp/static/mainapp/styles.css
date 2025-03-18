@@ -1,0 +1,92 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f4f7f6; /* Light grey background */
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.inner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff; /* White background for the inner container */
+    padding: 1rem;
+    border: 1px solid #e1e1e1; /* Light grey border */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    gap: 1rem;
+    width: 100%;
+}
+
+textarea {
+    resize: none;
+    border: 1px solid #ddd; /* Light grey border */
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+#grid-1, #grid-2 {
+    width: calc(100vh - 100px); 
+    height: 150px; 
+    background-color: #f5f7fa; /* Light greyish background */
+    overflow: hidden;
+    transition: background-color 0.3s ease;
+}
+
+#grid-2:hover {
+    background-color: #e2e6ea; /* Slightly darker grey for hover */
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+    .inner-container {
+        display: flex;
+        flex-direction: column;
+    }
+    #grid-1, #grid-2 {
+        width: calc(50vw - 20px); 
+        height: calc(30vh - 10px); 
+    }
+}
+
+form div input[type="radio"] {
+    display: inline-block;
+    background-color: #4caf50; /* Green color for radio buttons */
+    padding: 5px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+form div input[type="submit"] {
+    background-color: #007bff; /* Blue color for submit button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+form div input[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+legend {
+    font-weight: bold;
+    color: #333;
+}
+
+fieldset {
+    margin-bottom: 1rem;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
