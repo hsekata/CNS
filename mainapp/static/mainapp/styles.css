@@ -1,92 +1,112 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #f4f7f6; /* Light grey background */
-    height: 100vh;
-    font-family: Arial, sans-serif;
-}
 
-.inner-container {
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff; /* White background for the inner container */
-    padding: 1rem;
-    border: 1px solid #e1e1e1; /* Light grey border */
+    height: 100vh;
+}
+
+.container {
+    background: #fff;
+    padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    gap: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
     width: 100%;
 }
 
-textarea {
-    resize: none;
-    border: 1px solid #ddd; /* Light grey border */
-    border-radius: 8px;
-    padding: 10px;
-    font-size: 16px;
-    font-family: Arial, sans-serif;
+h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
 }
 
-#grid-1, #grid-2 {
-    width: calc(100vh - 100px); 
-    height: 150px; 
-    background-color: #f5f7fa; /* Light greyish background */
-    overflow: hidden;
-    transition: background-color 0.3s ease;
+p {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 1.5rem;
 }
 
-#grid-2:hover {
-    background-color: #e2e6ea; /* Slightly darker grey for hover */
-    cursor: not-allowed;
-    opacity: 0.7;
+.inner-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
 }
 
-@media (max-width: 768px) {
-    .inner-container {
-        display: flex;
-        flex-direction: column;
-    }
-    #grid-1, #grid-2 {
-        width: calc(50vw - 20px); 
-        height: calc(30vh - 10px); 
-    }
-}
-
-form div input[type="radio"] {
-    display: inline-block;
-    background-color: #4caf50; /* Green color for radio buttons */
-    padding: 5px;
-    border-radius: 50%;
+textarea, .output-box {
+    width: 100%;
+    height: 150px;
+    padding: 0.5rem;
     margin-right: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    resize: none;
+    transition: border-color 0.3s ease;
 }
 
-form div input[type="submit"] {
-    background-color: #007bff; /* Blue color for submit button */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+textarea:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.output-box {
+   
+    overflow-wrap: break-word;
+    overflow-y: auto; 
+    word-break: break-all; 
+}
+
+.radio-options {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.radio-options label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     cursor: pointer;
-    font-size: 16px;
-    font-family: Arial, sans-serif;
+}
+
+.features {
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.features legend {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.features label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-form div input[type="submit"]:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-}
-
-legend {
-    font-weight: bold;
-    color: #333;
-}
-
-fieldset {
-    margin-bottom: 1rem;
-}
-
-input[type="checkbox"] {
-    margin-right: 5px;
+.submit-btn:hover {
+    background-color: #2980b9;
 }
