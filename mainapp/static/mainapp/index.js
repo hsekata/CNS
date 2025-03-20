@@ -24,7 +24,7 @@ const type = () => {
         console.log("The value of the checkbox is:", checkB.value);
         return checkB.id;
     } 
-    return;;
+    return;
     
 };
 
@@ -46,7 +46,7 @@ btn.addEventListener("click", (event) => {
 
     if (!textF) {
         console.log("Error: Text field is empty!");
-        textField.style.border = "2px solid red"; 
+        textField.style.border = "2px solid red"; x1
         setTimeout(() => {
             textField.style.border = "1px solid black";
         }, 5000);

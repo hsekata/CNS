@@ -1,8 +1,7 @@
-import base64
 import json
+import base64
 from django.shortcuts import render
 from django.http import JsonResponse
-from cryptography.fernet import Fernet
 from .otp import generate_otp_key, otp_encrypt, otp_decrypt
 from .des3 import generate_des3_key, des3_encrypt, des3_decrypt
 from .aes import generate_aes_key, aes_encrypt, aes_decrypt
@@ -11,7 +10,7 @@ encryption_managers = {}
 
 class EncryptionManager:
     def __init__(self, session_key):
-        self.session_key = session_key 
+        self.session_key = session_key
         self._key = generate_aes_key()
         print(f"Generated AES key for session {self.session_key}: {self._key}")
 
@@ -50,12 +49,13 @@ def encrypt(request):
     if algorithm == 'OTP':
         key = generate_otp_key(len(plaintext))
         ciphertext = otp_encrypt(plaintext, key)
-        key_base64 = base64.b64encode(key).decode()
+        key_base64 = base64.b64encode(key).decode('utf-8')
+        request.session["otp_key"] = key_base64
 
     elif algorithm == '3DES':
         key = generate_des3_key()
         ciphertext = des3_encrypt(plaintext, key)
-        key_base64 = base64.b64encode(key).decode()
+        request.session["des3_key"] = base64.b64encode(key).decode('utf-8')
 
     elif algorithm == 'AES':
         try:
@@ -76,14 +76,13 @@ def decrypt(request):
 
     data = json.loads(request.body)
     algorithm = data.get('algorithm')
-    ciphertext = bytes.fromhex(data.get('plainOrCipherText'))
-
+    ciphertext = bytes.fromhex(data.get('plainOrCipherText')) 
     if algorithm == 'OTP':
-        key = generate_otp_key(len(ciphertext))
+        key = base64.b64decode(request.session["otp_key"])  
         plaintext = otp_decrypt(ciphertext, key)
 
     elif algorithm == '3DES':
-        key = generate_des3_key()
+        key = base64.b64decode(request.session.get("des3_key", ""))
         plaintext = des3_decrypt(ciphertext, key)
 
     elif algorithm == 'AES':
@@ -92,5 +91,7 @@ def decrypt(request):
         except ValueError as e:
             return JsonResponse({'error': f"Invalid key for AES decryption: {str(e)}"}, status=400)
 
-    return JsonResponse({'plaintext': plaintext})
+    if isinstance(plaintext, bytes):
+        plaintext = base64.b64encode(plaintext).decode('utf-8') 
 
+    return JsonResponse({'plaintext': plaintext})
