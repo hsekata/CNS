@@ -54,9 +54,9 @@ def encrypt(request):
 
     elif algorithm == '3DES':
         key = generate_des3_key()
-        ciphertext = des3_encrypt(plaintext, key)
+        ciphertext, pad_len = des3_encrypt(plaintext, key)
         request.session["des3_key"] = base64.b64encode(key).decode('utf-8')
-
+        request.session["pad_len"] = pad_len
     elif algorithm == 'AES':
         try:
             ciphertext = encryption_manager.encrypt(plaintext)
@@ -82,8 +82,9 @@ def decrypt(request):
         plaintext = otp_decrypt(ciphertext, key)
 
     elif algorithm == '3DES':
+        pad_len = request.session.get("pad_len")
         key = base64.b64decode(request.session.get("des3_key", ""))
-        plaintext = des3_decrypt(ciphertext, key)
+        plaintext = des3_decrypt(ciphertext, key, pad_len)
 
     elif algorithm == 'AES':
         try:
