@@ -2,36 +2,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encryption Webpage</title>
-    <link rel="stylesheet" href="{% static 'mainapp/styles.css' %}">
-    <script src="{% static 'mainapp/index.js' %}" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Encryption Webpage</title>
+  <link rel="stylesheet" href="{% static 'mainapp/styles.css' %}" />
+  <script src="{% static 'mainapp/index.js' %}" defer></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Encryption & Decryption Tool</h1>
-        <div class="inner-container">
-            <textarea id="grid-1" placeholder="Type your text here..."></textarea>
-            <div id="grid-2" class="output-box"></div>
-        </div>
-        <form action="" method="post">
-            {% csrf_token %}
-            <div class="radio-options">
-                <input type="radio" id="OTP" name="selection" class="method">
-                <label for="OTP">OTP</label>
-                <input type="radio" id="3DES" name="selection" class="method">
-                <label for="3DES">3DES</label>
-                <input type="radio" id="AES" name="selection" class="method">
-                <label for="AES">AES</label>
-            </div>
-            <fieldset class="features">
-                <legend>Select an operation:</legend>
-                <label><input type="checkbox" id="encrypt" name="scales" checked> Encrypt</label>
-                <label><input type="checkbox" id="decrypt" name="horns"> Decrypt</label>
-            </fieldset>
-            <input type="submit" value="Submit" class="submit-btn">
-        </form>
+  <div class="container">
+    <h1>Encryption & Decryption Tool</h1>
+
+    <div class="inner-container">
+      <textarea id="grid-1" placeholder="Type your text here..."></textarea>
+      <div id="grid-2" class="output-box"></div>
     </div>
+
+    <form id="encryption-form" method="post">
+      {% csrf_token %}
+
+      <div class="radio-options">
+        <input type="radio" id="OTP" name="selection" value="OTP" class="method" />
+        <label for="OTP">OTP</label>
+
+        <input type="radio" id="3DES" name="selection" value="3DES" class="method" />
+        <label for="3DES">3DES</label>
+
+        <input type="radio" id="AES" name="selection" value="AES" class="method" />
+        <label for="AES">AES</label>
+
+        <input type="radio" id="RSA" name="selection" value="RSA" class="method" />
+        <label for="RSA">RSA</label>
+      </div>
+
+      <fieldset class="features">
+        <legend>Select an operation:</legend>
+        <label><input type="checkbox" id="encrypt" name="operation" value="encrypt" /> Encrypt</label>
+        <label><input type="checkbox" id="decrypt" name="operation" value="decrypt" /> Decrypt</label>
+      </fieldset>
+
+      <input type="submit" value="Submit" class="submit-btn" />
+    </form>
+  </div>
 </body>
 </html>
