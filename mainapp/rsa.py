@@ -2,10 +2,9 @@ from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.backends import default_backend
 import os
-import json
 import base64
 RSA_KEY_DIR = os.path.dirname(os.path.abspath(__file__))
-
+# loads public key from the same directory save as public_key.pem
 def load_public_key():
     key_path = os.path.join(RSA_KEY_DIR, 'public_key.pem')
     if not os.path.exists(key_path):
@@ -19,7 +18,7 @@ def load_public_key():
     except Exception as e:
         print(f"Error loading public key: {str(e)}")
         raise
-
+# loads private key from the same directory save as private_key.pem
 def load_private_key():
     key_path = os.path.join(RSA_KEY_DIR, 'private_key.pem')
     if not os.path.exists(key_path):
@@ -33,7 +32,7 @@ def load_private_key():
     except Exception as e:
         print(f"Error loading private key: {str(e)}")
         raise
-
+# performs RSA encryption using Public key
 def rsa_encrypt(plaintext):
     try:
         public_key = load_public_key()
@@ -51,7 +50,7 @@ def rsa_encrypt(plaintext):
     except Exception as e:
         print(f"RSA encryption failed: {str(e)}")
         raise
-
+# performs RSA decryption using Public key
 def rsa_decrypt(ciphertext_b64):
     try:
         private_key = load_private_key()

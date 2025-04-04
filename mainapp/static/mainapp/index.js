@@ -70,7 +70,6 @@ btn.addEventListener("click", (event) => {
 });
 
 const handleInput = async (textF, radioF, type) => {
-    
     const data = {
         algorithm: radioF,
         plainOrCipherText: textF,
@@ -78,7 +77,7 @@ const handleInput = async (textF, radioF, type) => {
     };
 
     if (type === "encrypt") encryptdecrypt = "encrypt";
-   else encryptdecrypt = "decrypt";
+    else encryptdecrypt = "decrypt";
 
     try {
         const res = await fetch(`http://127.0.0.1:8000/api/${encryptdecrypt}`, {
@@ -89,19 +88,11 @@ const handleInput = async (textF, radioF, type) => {
             },
             body: JSON.stringify(data),
         });
-        
-        
-        if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
-        }
 
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
         const jsonData = await res.json();
-        resText = jsonData["ciphertext"];
-        if (resText == undefined){
-            resText = jsonData["plaintext"];
-        }
+        let resText = jsonData["ciphertext"] || jsonData["plaintext"];
         document.getElementById("grid-2").innerText = resText;
-        console.log("Server Response:", jsonData);
     } catch (error) {
         console.error("Error sending data:", error);
     }
