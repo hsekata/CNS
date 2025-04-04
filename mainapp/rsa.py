@@ -50,7 +50,7 @@ def rsa_encrypt(plaintext):
     except Exception as e:
         print(f"RSA encryption failed: {str(e)}")
         raise
-# performs RSA decryption using Public key
+# performs RSA decryption ion using Private  key
 def rsa_decrypt(ciphertext_b64):
     try:
         private_key = load_private_key()
